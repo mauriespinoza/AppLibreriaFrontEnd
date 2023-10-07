@@ -13,13 +13,18 @@ const useCartReducer = () => {
       payload: product,
     });
 
+    const addQtyToCart = (product) =>
+    cartDispatch({
+      type: "ADD_QTY_CART",
+      payload: product,
+    });
   const removeFromCart = (product) =>
     cartDispatch({
       type: "REMOVE_ITEMS_CART",
       payload: product,
     });
 
-  return { cartState, addToCart, removeFromCart };
+  return { cartState, addToCart, removeFromCart, addQtyToCart };
 };
 
 
@@ -30,7 +35,7 @@ export const ProductosProvider = ({ children }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [countProduct, setCountProduct] = useState(1);
   const [count,setCount] = useState(1);
-  const { cartState, addToCart, removeFromCart } = useCartReducer();
+  const { cartState, addToCart, removeFromCart, addQtyToCart } = useCartReducer();
 
   const getProducts = async () => {
     try {
@@ -82,6 +87,7 @@ export const ProductosProvider = ({ children }) => {
         cart: cartState, 
         count,
         setCount,
+        addQtyToCart,
       }}
     >
       {children}

@@ -21,14 +21,19 @@ import { Footer } from "../footer/Footer";
 //import "./productDetails.css";
 export const ProductDetails = () => {
 
-  const {  removeFromCart, addToCart, count, setCount } = useProduct();
+  const {  removeFromCart, addToCart, count, setCount, addQtyToCart } = useProduct();
    // {id,nombre, descripcion,img,precio}
    const {id} = useParams();
     console.log("id:" + id);
     const {product, getProductById} = useProduct();
     useEffect(() => {
         // getProductsCategory();
-        getProductById(id)
+        getProductById(id);
+        if(count == 0){
+          setCount(1);
+        } else {
+          setCount(1);
+        }
      }, [id]);
 
      function FormatCLP(price) {
@@ -99,7 +104,7 @@ export const ProductDetails = () => {
           </Button>
         </ButtonGroup>
         <div>
-        <Button variant="contained" onClick={() => {addToCart({...product,count})}}>Añadir al Carrito</Button>
+        <Button variant="contained" onClick={() => {addQtyToCart({...product,count,setCount})}}>Añadir al Carrito</Button>
         </div>
           
         </CardContent>

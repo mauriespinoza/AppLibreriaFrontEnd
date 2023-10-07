@@ -7,7 +7,7 @@ import { ProductDetails } from "../components/products/ProductDetails";
 import { LoginForm } from "../views/pages/LoginForm";
 import { Cart } from "../views/pages/Cart";
 import { RegisterPage } from "../views/pages/RegisterPage";
-import {UserInfo} from "../views/pages/UserInfo";
+import {EditUserInfo} from "../views/pages/EditUserInfo";
 import { ProtectedRoutes } from "./ProtectedRoutes";
 // import {ProductosProvider} from '../context/ProductosContext'
 // import {CategorieProvider} from '../context/CategorieContext'
@@ -29,7 +29,7 @@ export const MainRoutes = () => {
           <Route path="/register/" element={<RegisterPage />} />
           <Route path="*" element={<h1>Error 404 - Ruta no encontrada</h1>} />
           <Route element={<ProtectedRoutes/>}>
-            <Route path="/datos" element={<UserInfo/>}/>
+            <Route path="/datos" element={<EditUserInfo/>}/>
           </Route>
           
         </Routes>
