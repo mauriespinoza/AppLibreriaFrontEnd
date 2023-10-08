@@ -1,3 +1,4 @@
+import {  Alert } from 'react-bootstrap';
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -14,7 +15,7 @@ import { useAuth } from "../../hooks/useAuth";
 
 export const SignIn = () => {
 
-  const { signin, isAuthenticated, token } = useAuth();
+  const { signin, isAuthenticated, token, errors } = useAuth();
   const navigate = useNavigate();
 
     
@@ -67,12 +68,23 @@ export const SignIn = () => {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
+          paddingBottom: "30px",
         }}
       >
         <Typography component="h1" variant="h5">
           Iniciar Sesion
         </Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+        {errors.map((error, i) => (
+                    <Alert
+                      sx={{ mb: 1 }}
+                      variant="danger"
+                      key={i}
+                      severity={''}
+                    >
+                      {errors}
+                    </Alert>
+                  ))}
           <TextField
             margin="normal"
             required
