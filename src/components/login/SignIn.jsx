@@ -124,7 +124,12 @@ export const SignIn = () => {
               </Link>
             </Grid> */}
             <Grid item>
-              <Link href="/register" variant="body2">
+              {/* <Link href="/register" variant="body2">
+                {"Registrate"}
+              </Link> */}
+              <Link onClick={() => {
+                navigate("/register")
+              }} variant="body2">
                 {"Registrate"}
               </Link>
             </Grid>
