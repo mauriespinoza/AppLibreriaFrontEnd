@@ -1,14 +1,16 @@
 import { PayPalButtons } from "@paypal/react-paypal-js";
 
-export const PaypalButton = ({ invoice, totalValue }) => {
+export const PayPalButton = ({ invoice, totalValue }) => {
 
     const approve = async (data, actions) => {
-        
+        alert('entro a approve')
         try {
           const order = await actions.order?.capture ()
+          alert(`order: ${order}`)
           console.log ('>>> PAYPAL', order)
           }
         catch (error) {
+            alert('fallo paypal')
           console.log (error)
           }
         }
@@ -20,7 +22,7 @@ export const PaypalButton = ({ invoice, totalValue }) => {
             {
               description: invoice,
               amount: {
-                value: totalValue,
+                value: 1000,
               },
             },
           ],

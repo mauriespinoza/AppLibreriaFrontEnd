@@ -1,7 +1,7 @@
 import { CardImg } from "react-bootstrap";
 import { useProduct } from "../../hooks/useProduct";
 import { useAuth } from "../../hooks/useAuth";
-import { PayPalButtons } from "@paypal/react-paypal-js";
+import { PayPalButton } from "../paypal/PaypalButton"
 import {
   MDBBtn,
   MDBCard,
@@ -196,7 +196,7 @@ export const CartItems = () => {
                             ${FormatCLP(cartTotal)}
                           </MDBTypography>
                         </div>
-                        {token ? <PayPalButtons invoice = {'Productos'} totalValue={cartTotal}/>
+                        {token ? <PayPalButton invoice = {'Productos'} totalValue={cartTotal}/>
                         :
                         
                         <MDBBtn color="primary" block size="lg">
