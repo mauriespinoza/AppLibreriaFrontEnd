@@ -43,8 +43,9 @@ export const BadgeButtonUser = () => {
     <IconButton aria-label="login">
       <StyledBadge  color="secondary">
         {
-          token ? <Logout color="action" onClick={() => {logout()}}/> : 
-          <LoginIcon color="action" onClick={()=> {navigate(`/login`)}}/>
+          token ? <Logout color="action" onClick={() => {logout()}} data-bs-toggle="tooltip" data-bs-placement="top" title="Cerrar Sesión"/> 
+          : 
+          <LoginIcon color="action" onClick={()=> {navigate(`/login`)}} data-bs-toggle="tooltip" data-bs-placement="top" title="Iniciar Sesión"/>
         }
         {/* <LoginIcon color="action" onClick={()=> {navigate(`/login/`)}}/>
         <LoginIcon color="action"/> */}

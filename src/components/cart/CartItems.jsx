@@ -1,16 +1,7 @@
 import { CardImg } from "react-bootstrap";
 import { useProduct } from "../../hooks/useProduct";
-// import {
-//   Box,
-//   Button,
-//   CardActions,
-//   CardContent,
-//   Divider,
-//   List,
-//   ListItem,
-//   Typography,
-// } from "@mui/material";
-
+import { useAuth } from "../../hooks/useAuth";
+import { PayPalButtons } from "@paypal/react-paypal-js";
 import {
   MDBBtn,
   MDBCard,
@@ -30,7 +21,11 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import "./cartItems.css";
 export const CartItems = () => {
+
   const { cart, removeFromCart, addToCart } = useProduct();
+
+  const { signin, isAuthenticated, token, errors } = useAuth();
+ console.log(`CartItem.token: ${token}`)
   let cartTotal = cart.reduce(
     (acumulador, actual) => acumulador + actual.total,
     0
@@ -201,10 +196,14 @@ export const CartItems = () => {
                             ${FormatCLP(cartTotal)}
                           </MDBTypography>
                         </div>
-
+                        {token ? <PayPalButtons invoice = {'Productos'} totalValue={cartTotal}/>
+                        :
+                        
                         <MDBBtn color="primary" block size="lg">
-                          PAGAR
-                        </MDBBtn>
+                        PAGAR
+                      </MDBBtn>
+                        }
+                        
                       </div>
                     </MDBCol>
                   </MDBRow>
