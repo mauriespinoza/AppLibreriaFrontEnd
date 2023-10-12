@@ -19,7 +19,7 @@ export const AuthProvider = ({ children }) => {
       console.log(`signin.response.token: ${JSON.stringify(response.data)}`)
       if(response.data){
         setToken(response.data);
-        setErrors([response.data.message]);
+        //setErrors([response.data.message]);
         setUser(response.data.userdata);
         setIsAuthenticated(true);
         setUser(response.data);
@@ -42,6 +42,22 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem("Token",JSON.stringify(token) ?? '' )
   }, [token])
   
+  useEffect(() => {
+
+    if (errors.length > 0) {
+
+      const timer = setTimeout(() => {
+
+        setErrors([]);
+
+      }, 3000);
+
+      return () => clearTimeout(timer);
+
+    }
+
+  }, [errors]);
+  
   const singup = async (user) => {
     try{
       console.log(`singup: ${user}`)
@@ -50,13 +66,13 @@ export const AuthProvider = ({ children }) => {
       if(response.data){
         setUser(response.data);
         setToken(response.data.token);
-        setErrors([response.data.message]);
+        //setErrors([response.data.message]);
         setIsAuthenticated(true);
         return true;
       } else {
         setUser(null);
         setToken('');
-        setErrors([response.data.message]);
+        //setErrors([response.data.message]);
         setIsAuthenticated(false);
         return false;
       }

@@ -84,7 +84,7 @@ export const Registration = () => {
         console.log(`response: Usuario creado`);
 
         setVariantlbl("success");
-        setErrors('');
+        //setErrors('');
         setTimeout(() => {
           navigate('/');
         }, 5000);
@@ -114,7 +114,7 @@ export const Registration = () => {
             <Form onSubmit = {(e) => {onSubmitData(e)}}>
 
               <p className="text-center h2 fw-bold mb-5 mx-1 mx-md-4 mt-4">Registrate en Candelabra</p>
-              {errors.map((error, i) => (
+              {errors.length !== 0 ? errors.map((error, i) => (
                     <Alert
                       sx={{ mb: 1 }}
                       variant={variantlbl}
@@ -123,7 +123,7 @@ export const Registration = () => {
                     >
                       {errors}
                     </Alert>
-                  ))}
+                  )) : null}
 
               <div className="d-flex flex-row align-items-center mb-4 ">
                	<MDBIcon fas icon="user me-3" size='lg'/>

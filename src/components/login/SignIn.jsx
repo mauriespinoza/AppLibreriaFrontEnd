@@ -16,16 +16,17 @@ import { useAuth } from "../../hooks/useAuth";
 
 export const SignIn = () => {
 
-  const { signin, isAuthenticated, token, errors } = useAuth();
+  const { signin, isAuthenticated, token, errors, setErrors } = useAuth();
   const navigate = useNavigate();
 
-    
+  
 
   const [authenticated, setAuthenticated] = useState(false);
  // const [token, setToken] = useState('');
   
   const handleSubmit = (event) => {
     event.preventDefault();
+    setErrors([]);
     const data = new FormData(event.currentTarget);
     console.log({
       email: data.get("email"),
@@ -76,7 +77,8 @@ export const SignIn = () => {
           Iniciar Sesion
         </Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-        {errors.map((error, i) => (
+        {errors.length !== 0 ? 
+        errors.map((error, i) => (
                     <Alert
                       sx={{ mb: 1 }}
                       variant="danger"
@@ -85,7 +87,7 @@ export const SignIn = () => {
                     >
                       {errors}
                     </Alert>
-                  ))}
+                  )) : null}
           <TextField
             margin="normal"
             required
@@ -128,9 +130,9 @@ export const SignIn = () => {
               {/* <Link href="/register" variant="body2">
                 {"Registrate"}
               </Link> */}
-              <Link to="/register" variant="body2">
+              <Button onClick={()=>  (navigate("/register" ), setErrors([]))}  variant="body2">
                 {"Registrate"}
-              </Link>
+              </Button>
             </Grid>
           </Grid>
         </Box>
