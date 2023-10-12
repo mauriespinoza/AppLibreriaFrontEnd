@@ -1,4 +1,4 @@
-import { CardImg } from "react-bootstrap";
+import { Alert, CardImg } from "react-bootstrap";
 import { useProduct } from "../../hooks/useProduct";
 import { useAuth } from "../../hooks/useAuth";
 import { PayPalButton } from "../paypal/PaypalButton"
@@ -24,7 +24,7 @@ export const CartItems = () => {
 
   const { cart, removeFromCart, addToCart } = useProduct();
 
-  const { signin, isAuthenticated, token, errors } = useAuth();
+  const { signin, isAuthenticated, token, errors, paypalStatus } = useAuth();
  console.log(`CartItem.token: ${token}`)
   let cartTotal = cart.reduce(
     (acumulador, actual) => acumulador + actual.total,
@@ -35,6 +35,15 @@ export const CartItems = () => {
     (acumulador, actual) => acumulador + actual.cantidad,
     0
   );
+  const messageStatus =() =>{
+    const {status, messagge } = paypalStatus;
+    console.log('messageStatus.status: ' +status)
+    if(status == 'success'){
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   function FormatCLP(price) {
     return new Intl.NumberFormat().format(price);
@@ -196,6 +205,19 @@ export const CartItems = () => {
                             ${FormatCLP(cartTotal)}
                           </MDBTypography>
                         </div>
+                        {/* { 
+                           messageStatus && <Alert>Hola
+                          </Alert>} */}
+                          {paypalStatus.map((paypal, i) => (
+                            <Alert
+                              sx={{ mb: 1 }}
+                              variant={paypal.status}
+                              key={i}
+                              severity={''}
+                            >
+                              {paypal.messagge}
+                            </Alert>
+                          ))}
                         {token ? <PayPalButton invoice = {'Productos'} totalValue={cartTotal}/>
                         :
                         

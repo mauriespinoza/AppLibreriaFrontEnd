@@ -9,6 +9,7 @@ import { Cart } from "../views/pages/Cart";
 import { RegisterPage } from "../views/pages/RegisterPage";
 import {EditUserInfo} from "../views/pages/EditUserInfo";
 import { ProtectedRoutes } from "./ProtectedRoutes";
+import { ProductById } from "../views/pages/ProductById";
 // import {ProductosProvider} from '../context/ProductosContext'
 // import {CategorieProvider} from '../context/CategorieContext'
 
@@ -23,7 +24,7 @@ export const MainRoutes = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/productos" element={<Products />} />
           <Route path="/productos/:categorie" element={<ProductByCategorie />} />
-          <Route path="/productosbyid/:id" element={<ProductDetails />} />
+          <Route path="/productosbyid/:id" element={<ProductById />} />
           <Route path="/login/" element={<LoginForm />} />
           <Route path="/cart/" element={<Cart />} />
           <Route path="/register/" element={<RegisterPage />} />

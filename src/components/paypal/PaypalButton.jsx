@@ -1,17 +1,24 @@
 import { PayPalButtons } from "@paypal/react-paypal-js";
+import { useAuth } from "../../hooks/useAuth";
 
 export const PayPalButton = ({ invoice, totalValue }) => {
+
+    const { setPaypalStatus } = useAuth();
 
     const approve = async (data, actions) => {
         alert('entro a approve')
         try {
-          const order = await actions.order?.capture ()
-          alert(`order: ${order}`)
-          console.log ('>>> PAYPAL', order)
+          const order = await actions.order?.capture ();
+          console.log ('PAYPAL', order)
+          setPaypalStatus([{status: 'success' ,messagge: 'Pago Exitoso'}]);
+          //alert(`order: ${order}`)
+          
           }
         catch (error) {
-            alert('fallo paypal')
-          console.log (error)
+            //alert('fallo paypal')
+            console.log (error)
+            setPaypalStatus([{status: 'danger' , messagge: 'Hemos tenido un problema con su Pago'}])
+          
           }
         }
   return (
@@ -22,7 +29,7 @@ export const PayPalButton = ({ invoice, totalValue }) => {
             {
               description: invoice,
               amount: {
-                value: 1000,
+                value: totalValue,
               },
             },
           ],

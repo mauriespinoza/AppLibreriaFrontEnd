@@ -11,6 +11,7 @@ export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [errors, setErrors] = useState([]);
   const navigate = useNavigate();
+  const [paypalStatus, setPaypalStatus]= useState([]);
 
   const signin = async (user) => {
     try {
@@ -19,16 +20,21 @@ export const AuthProvider = ({ children }) => {
       if(response.data){
         setToken(response.data);
         setErrors([response.data.message]);
+        setUser(response.data.userdata);
+        setIsAuthenticated(true);
+        setUser(response.data);
+        return true;
        // localStorage.setItem("Token",response.data);
       } else {
         setToken('');
+        return false;
         //localStorage.setItem("Token",'');
       }
-      setIsAuthenticated(true);
-      setUser(response.data);
+      
     } catch (error) {
-      console.log(error)
+      console.log("sign.exception: " + error)
       setErrors([error.response.data.message]);
+      return false;
     }
   };
 
@@ -43,15 +49,24 @@ export const AuthProvider = ({ children }) => {
        console.log(`singup.response.token: ${JSON.stringify(response.data)}`)
       if(response.data){
         setUser(response.data);
+        setToken(response.data.token);
         setErrors([response.data.message]);
+        setIsAuthenticated(true);
+        return true;
       } else {
-        setUser('');
+        setUser(null);
+        setToken('');
         setErrors([response.data.message]);
+        setIsAuthenticated(false);
+        return false;
       }
     } catch(error){
       console.log("Exception: " + error.response.data.message)
-      setUser('');
+      setUser(null);
       setErrors([error.response.data.message]);
+      setToken('');
+      setIsAuthenticated(false);
+      return false;
     }
   }
   const logout = () =>{
@@ -75,6 +90,8 @@ export const AuthProvider = ({ children }) => {
         setUser,
         logout,
         errors,
+        setPaypalStatus,
+        paypalStatus,
       }}>
         {children}
       </AuthContext.Provider>

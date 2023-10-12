@@ -1,6 +1,6 @@
 import { useNavigate,Link } from "react-router-dom";
 import { useProduct } from "../../hooks/useProduct";
-
+import './products.css'
 export const Products = () => {
     const {products, getProductById, currentPage,addToCart, count} = useProduct();
     const navigate = useNavigate();
@@ -17,7 +17,7 @@ export const Products = () => {
                 <div className="card" key={product._id}>
                   <figure className="figure">
                     
-                    <img src={product.imagen} style={{cursor:'pointer'}} alt={product.descripcion} onClick={()=> {getProductById( product._id),navigate(`/productosbyid/${product._id}`)}}/>
+                    <img className="card-img" src={product.imagen} style={{cursor:'pointer'}} alt={product.descripcion} onClick={()=> {getProductById( product._id),navigate(`/productosbyid/${product._id}`)}}/>
                   </figure>
                   <div className="card-body">
                     <h4 className="card-title">{product.nombre}</h4>

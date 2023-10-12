@@ -1,34 +1,107 @@
 import { useState } from "react";
-import { Form , Alert } from 'react-bootstrap';
-import { 
-  MDBBtn, 
-  MDBContainer, 
-  MDBRow, 
-  MDBCol, 
-  MDBCard, 
-  MDBCardBody, 
-  MDBCardImage, 
-  MDBInput, 
-  MDBIcon, 
-} 
-from 'mdb-react-ui-kit';
+import { Form, Alert } from "react-bootstrap";
+import {
+  MDBBtn,
+  MDBContainer,
+  MDBRow,
+  MDBCol,
+  MDBCard,
+  MDBCardBody,
+  MDBCardImage,
+  MDBInput
+} from "mdb-react-ui-kit";
+
 
 export const EditRegisterUser = () => {
-       
-      
-        const [name, setName] = useState('lucas');
-        const [email, setEmail] = useState('lucas@hhh.cl');
-      
-        const handleSubmit = (e) => {
-          e.preventDefault();
-          const updatedUser = { ...name, email };
-          //updateUser(updatedUser);
-        };
+  const [name, setName] = useState("lucas");
+  const [email, setEmail] = useState("lucas@hhh.cl");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const updatedUser = { ...name, email };
+    //updateUser(updatedUser);
+  };
   return (
     <>
-    
-    
-    <MDBContainer>
+      <MDBContainer fluid>
+        <MDBRow className="d-flex justify-content-center align-items-center">
+          <MDBCol lg="8">
+            <MDBCard className="my-5 rounded-3" style={{ maxWidth: "auto" }}>
+              {/* <MDBCardImage
+                src="https://res.cloudinary.com/dxy1spfug/image/upload/c_thumb,g_face,w_129/v1694211813/utensilios-del-arte-pinturas_k6heev.webp"
+                className="w-100 rounded-top"
+                alt="Sample photo"
+              /> */}
+            <Form onSubmit = {(e) => {onSubmitData(e)}}>
+              <MDBCardBody className="px-5">
+                <h3 className="text-center mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">
+                  Información de la cuenta
+                </h3>
+
+                <MDBInput
+                  wrapperClass="mb-4"
+                  label="Rut"
+                  id="rut"
+                  type="text"
+                  disabled="true"
+                />
+
+                <MDBInput
+                  wrapperClass="mb-4"
+                  label="Nombre"
+                  id="nombre"
+                  type="text"
+                />
+
+                <MDBInput
+                  wrapperClass="mb-4"
+                  label="Apellido"
+                  id="apellido"
+                  type="text"
+                />
+
+                <MDBRow>
+                  <MDBCol md="6">
+                    <MDBInput
+                      wrapperClass="mb-4"
+                      label="Mail"
+                      id="email"
+                      type="text"
+                      required={true}
+                    />
+                  </MDBCol>
+
+                  <MDBCol md="6" className="mb-4">
+                    <MDBInput
+                      wrapperClass="mb-4"
+                      label="Edad"
+                      id="edad"
+                      type="text"
+                    />
+                  </MDBCol>
+                </MDBRow>
+
+                <MDBRow>
+                  <MDBInput
+                    wrapperClass="mb-4"
+                    label="Password"
+                    id="password"
+                    type="password"
+                  />
+                </MDBRow>
+                <div className="text-center">
+                  <MDBBtn type='submit' color="primary" size="lg">
+                    Guardar Cambios
+                  </MDBBtn>
+                </div>
+              </MDBCardBody>
+              </Form>
+            </MDBCard>
+          </MDBCol>
+        </MDBRow>
+      </MDBContainer>
+
+      {/* <MDBContainer fluid>
 
       <MDBCard className='text-black m-5' style={{borderRadius: '25px'}}>
         <MDBCardBody>
@@ -40,10 +113,7 @@ export const EditRegisterUser = () => {
               <p className="text-center h2 fw-bold mb-5 mx-1 mx-md-4 mt-4">Información de la cuenta</p>
               
 
-              {/* <div className="d-flex flex-row align-items-center mb-4 ">
-               	<MDBIcon fas icon="user me-3" size='lg'/>
-                <MDBInput label='Rut' id='rut' name="rut" type='text' size='lg' className='w-100' required={true} placeholder="Sin puntos ni guion"/>
-              </div> */}
+        
 
               <div className="d-flex flex-row align-items-center mb-4 ">
                	<MDBIcon fas icon="user me-3" size='lg'/>
@@ -70,14 +140,6 @@ export const EditRegisterUser = () => {
                 <MDBInput label='Clave' id='password' name="password" type='password' size='lg' required={true}/>
               </div>
 
-              {/* <div className="d-flex flex-row align-items-center mb-4">
-                <MDBIcon fas icon="key me-3" size='lg'/>
-                <MDBInput label='Repita Clave' id='password2' name="password2" type='password' size='lg' required={true}/>
-              </div> */}
-
-              {/* <div className='mb-4'>
-                <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Subscribe to our newsletter' />
-              </div> */}
 	
               <MDBBtn  variant="primary" size='lg' type='submit'>Crear cuenta</MDBBtn>
               </Form>
@@ -89,7 +151,7 @@ export const EditRegisterUser = () => {
         </MDBCardBody>
       </MDBCard>
 
-    </MDBContainer>
+    </MDBContainer> */}
     </>
-  )}
-
+  );
+};

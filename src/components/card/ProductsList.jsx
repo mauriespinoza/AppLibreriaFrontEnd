@@ -49,7 +49,7 @@ export const ProductsList = () => {
               .map((product) => (
                 <div className="card" key={product._id}>
                   <figure className="figure">
-                    <img src={product.imagen} alt={product.descripcion} />
+                    <img className="card-img" src={product.imagen} alt={product.descripcion} />
                   </figure>
                   <div className="card-body">
                     <h4 className="card-title">{product.nombre}</h4>

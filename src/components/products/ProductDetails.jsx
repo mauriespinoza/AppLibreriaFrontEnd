@@ -52,20 +52,26 @@ export const ProductDetails = () => {
     //     </div>
     // </div>
     <>
-    <Card sx={{ display: 'flex' }}>
+    <Box sx={{display:'flex' , justifyContent:'center', alignItems:'center', height:'90vh'}}>
+
+    
+    <Card sx={{ display: 'flex', flexFlow: 'row wrap', justifyContent:'center', gap:{xs:0,md:6}}} elevation={0}>
       {/* <Box sx={{ display: 'flex', flexDirection: 'column' }}> */}
       <CardMedia
         component="img"
-        sx={{ width: 400 }}
+        sx={{ width: {xs: '250px', md: '300px', lg:'400px'} , borderRadius:'12px', border:'1px solid #000000', padding:2}}
         image={product.imagen}
         alt={product.descripcion}
       />
-        <CardContent sx={{ flex: '1 0 auto' }}>
-          <Typography component="div" variant="h4">
+        <CardContent sx={{ display:'flex', flexFlow:'column wrap' ,gap:2, alignItems:{xs:'center', md:'start'} }}>
+          <Typography component="div" variant="h1" fontSize={28}>
           {product.nombre}
           </Typography>
-          <Typography variant="h5" color="text.secondary" component="div">
+          <Typography variant="p" color="text.secondary" component="p">
           {product.descripcion}
+          </Typography>
+          <Typography variant="p" fontWeight='bold' color="text.secondary" component="p">
+          Stock: <Typography component='span'>{ product.cantidad} </Typography> 
           </Typography>
           <Typography component="div" variant="h4" color="orange">
           $ {FormatCLP(product.valor)}
@@ -104,14 +110,16 @@ export const ProductDetails = () => {
           </Button>
         </ButtonGroup>
         <div>
-        <Button variant="contained" onClick={() => {addQtyToCart({...product,count,setCount})}}>Añadir al Carrito</Button>
+        <Button  variant="contained" onClick={() => {addQtyToCart({...product,count,setCount})}}>Añadir al Carrito</Button>
         </div>
           
         </CardContent>
       {/* </Box> */}
       
     </Card>
+    </Box>
     <Footer/>
+    
     </>
   )
 }
