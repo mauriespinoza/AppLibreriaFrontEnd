@@ -81,7 +81,7 @@ export const Registration = () => {
  
     }
     useEffect(() => {
-      if(user){
+      if(token){
         console.log(`response: Usuario creado`);
 
         setVariantlbl("success");
@@ -103,7 +103,7 @@ export const Registration = () => {
       console.log("Register.isAuthenticated:" + isAuthenticated)
       if (isAuthenticated) {
         console.log("isAuthenticated2")
-        navigate("/");
+        //navigate("/");
       }
     }, [isAuthenticated]);
 

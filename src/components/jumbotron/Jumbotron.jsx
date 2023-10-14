@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react"
+import { useNavigate } from "react-router-dom";
 import { Carousel } from "react-bootstrap";
 import { axiosClient } from "../../config/api";
 
 import './jumbotron.css'
  export const Jumbotron = () => {
   const [ imagenes, setImagenes ] = useState([]);
+  const navigate = useNavigate();
   const [index, setIndex] = useState(0);
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
@@ -35,6 +37,8 @@ import './jumbotron.css'
             className="w-100 p-10"
             src={slide.img}
             alt={slide.nombre}
+            style={{cursor:'pointer'}}
+            onClick={() => navigate(`/productos/${slide._id}`)}
           />
           <Carousel.Caption>
             <h3>{slide.nombre}</h3>

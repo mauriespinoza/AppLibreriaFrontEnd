@@ -13,6 +13,7 @@ import { useState, useEffect } from "react";
 import { axiosClient } from "../../config/api";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
+import './signin.css';
 
 export const SignIn = () => {
 
@@ -73,7 +74,7 @@ export const SignIn = () => {
           paddingBottom: "30px",
         }}
       >
-        <Typography component="h1" variant="h5">
+        <Typography sx={{ fontFamily:'Delicious Handrawn', fontSize:30}} className='title' component="h1" variant="h5">
           Iniciar Sesion
         </Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>

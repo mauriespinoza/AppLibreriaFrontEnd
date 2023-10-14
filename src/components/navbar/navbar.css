@@ -15,6 +15,11 @@
     font-size: 24px;
     font-family: 'Delicious Handrawn', cursive;
 }
+.dropdown-item{
+    color: #86486a94; 
+    font-size: 20px;
+    font-family: 'Delicious Handrawn', cursive;
+}
 #logo{
     height: 80px;
 }

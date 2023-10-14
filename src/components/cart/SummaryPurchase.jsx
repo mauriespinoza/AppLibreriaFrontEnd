@@ -19,14 +19,13 @@ import ButtonGroup from "@mui/material/ButtonGroup";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import "./cartItems.css";
-import { ModalDialog } from "../modals/ModalDialog";
-import { useState } from "react";
-export const CartItems = () => {
 
-  const { cart, removeFromCart, addToCart } = useProduct();
+
+export const SummaryPurchase = () => {
+    const { cart, removeFromCart, addToCart } = useProduct();
   // const [statusModal, setStatusModal]= useState(false);
 
-  const { token, paypalStatus, mailGuess } = useAuth();
+  const { token } = useAuth();
  console.log(`CartItem.token: ${token}`)
   let cartTotal = cart.reduce(
     (acumulador, actual) => acumulador + actual.total,
@@ -37,31 +36,15 @@ export const CartItems = () => {
     (acumulador, actual) => acumulador + actual.cantidad,
     0
   );
-  // const messageStatus =() =>{
-  //   const {status, messagge } = paypalStatus;
-  //   console.log('messageStatus.status: ' +status)
-  //   if(status == 'success'){
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // }
 
   function FormatCLP(price) {
     return new Intl.NumberFormat().format(price);
   }
   console.log("cartItems: " + JSON.stringify(cart));
 
-  useEffect (() =>{
-    if(mailGuess){
-      console.log('mailGuess: ' + mailGuess)
-    } else {
-      console.log('nomailGuess: ' + mailGuess)
-    }
-  }, [''])
   return (
     <>
-      <section className="h-100 h-custom" style={{ backgroundColor: "#eee" }}>
+         <section className="h-100 h-custom" style={{ backgroundColor: "#eee" }}>
         <MDBContainer className="py-5 h-100">
           <MDBRow className="justify-content-center align-items-center h-100">
             <MDBCol size="12">
@@ -184,27 +167,6 @@ export const CartItems = () => {
                           </MDBTypography>
                         </div>
 
-                        {/* <MDBTypography tag="h5" className="text-uppercase mb-3">
-                    Shipping
-                  </MDBTypography> */}
-
-                        {/* <div className="mb-4 pb-2">
-                    <select className="select p-2 rounded bg-grey" style={{ width: "100%" }}>
-                      <option value="1">Standard-Delivery- €5.00</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
-                      <option value="4">Four</option>
-                    </select>
-                  </div> */}
-                        {/* 
-                  <MDBTypography tag="h5" className="text-uppercase mb-3">
-                    Give code
-                  </MDBTypography>
-
-                  <div className="mb-5">
-                    <MDBInput size="lg" label="Enter your code" />
-                  </div> */}
-
                         <hr className="my-4" />
 
                         <div className="d-flex justify-content-between mb-5">
@@ -215,36 +177,6 @@ export const CartItems = () => {
                             ${FormatCLP(cartTotal)}
                           </MDBTypography>
                         </div>
-                        {/* { 
-                           messageStatus && <Alert>Hola
-                          </Alert>} */}
-                          {paypalStatus.map((paypal, i) => (
-                            <Alert
-                              sx={{ mb: 1 }}
-                              variant={paypal.status}
-                              key={i}
-                              severity={''}
-                            >
-                              {paypal.messagge}
-                            </Alert>
-                          ))}
-                        {token ? <PayPalButton invoice = {'Productos'} totalValue={cartTotal}/>
-                        :  !mailGuess ?
-                          <ModalDialog/> : <PayPalButton invoice = {'Productos'} totalValue={cartTotal}/>
-                        
-                        
-                        // <div className="d-flex justify-content-between mb-5">
-                        //   <MDBTypography tag="h5" className="text-uppercase">
-                        //     ¿Desea iniciar Sesion para realizar el pago?
-                        //   </MDBTypography>
-                        //   <ModalDialog/>
-                        // </div>
-                      //   <MDBBtn color="primary" block size="lg" onClick={()=>setStatusModal(true)}>
-                      //   PAGAR
-                      // </MDBBtn>
-                          
-                        }
-                        
                       </div>
                     </MDBCol>
                   </MDBRow>
@@ -255,5 +187,5 @@ export const CartItems = () => {
         </MDBContainer>
       </section>
     </>
-  );
-};
+  )
+}

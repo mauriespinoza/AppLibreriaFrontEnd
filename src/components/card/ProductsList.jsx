@@ -1,12 +1,15 @@
 import { useState, useEffect, useContext } from "react";
-import { axiosClient } from "../../config/api";
+import { useNavigate } from "react-router-dom";
 import Row from "react-bootstrap/Row";
-import { Pagination } from "../../components/card/Pagination";
 import "./productList.css";
 import ProductsContext from "../../context/ProductContext";
 import { useProduct } from "../../hooks/useProduct";
+import Typography from '@mui/material/Typography';
+
 export const ProductsList = () => {
     const [products, setProducts]=useState([]);
+    const { getProductById, addToCart, count} = useProduct();
+    const navigate = useNavigate();
 
     // console.log(products.length);
      const globalContext = useContext(ProductsContext);
@@ -25,31 +28,25 @@ export const ProductsList = () => {
   
     const lastIndex = currentPage * productsPerPage;
     const fisrstIndex = lastIndex - productsPerPage;
-    //obtenemos las categorias desde la BD
-    // const getProducts = async () => {
-    //   try {
-    //     const response = await axiosClient.get("/products");
-    //     console.log(response);
-    //     setProducts(response.data);
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // };
+
     useEffect(() => {
        getAllProducts();
     }, []);
+
     function FormatCLP(price) {
       return new Intl.NumberFormat().format(price);
     }
+    
     return (
       <>
+        <Typography variant="p" fontWeight='bold' fontSize={36} color="text.primary" component="p">Los más Vendidos</Typography>
         <div className="card-container">
           <Row className="g-4" xs={1} md={4}>
             {products
               .map((product) => (
                 <div className="card" key={product._id}>
                   <figure className="figure">
-                    <img className="card-img" src={product.imagen} alt={product.descripcion} />
+                    <img className="card-img" style={{cursor:'pointer'}} onClick={()=> {getProductById( product._id),navigate(`/productosbyid/${product._id}`)}} src={product.imagen} alt={product.descripcion} />
                   </figure>
                   <div className="card-body">
                     <h4 className="card-title">{product.nombre}</h4>
@@ -57,7 +54,7 @@ export const ProductsList = () => {
                       {" "}
                       <strong>${FormatCLP(product.valor)}</strong>
                     </h4>
-                    <button className="btn btn-primary">Añadir al Carrito</button>
+                    <button onClick={() => {addToCart({...product,count})}} className="btn btn-primary">Añadir al Carrito</button>
                   </div>
                 </div>
               ))

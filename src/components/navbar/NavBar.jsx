@@ -3,16 +3,10 @@ import { Link } from "react-router-dom";
 import CategoriesContext from "../../context/CategorieContext";
 
 import "./navbar.css";
-import { UserIcon } from "../user/UserIcon";
 import { BadgeButton } from "../card/BadgeButton";
 import { BadgeButtonUser } from "../badge/BadgeButtonUser";
 import {BadgeButtonSearch} from "../badge/BadgeButtonSearch";
 import { useAuth } from "../../hooks/useAuth";
-
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
 
 export const NavBar = () => {
   const [categories, setCategories] = useState([]);
@@ -23,7 +17,7 @@ export const NavBar = () => {
 
   const { token } = useAuth();
 
-  const rol = "user";
+  // const rol = "user";
 
   const getAllCategories = async () => {
     const data = await getCategories();

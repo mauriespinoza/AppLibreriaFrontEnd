@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./footer.css";
 export const Footer = () => {
   return(
@@ -22,9 +23,9 @@ export const Footer = () => {
           {/* <p>
             <a href="#">Costos de Envío</a>
           </p> */}
-          <p>
+          {/* <p>
             <a href="#">Cambios y Devoluciones</a>
-          </p>
+          </p> */}
           <p>
             <a href="#">Contáctanos</a>
           </p>
@@ -32,14 +33,14 @@ export const Footer = () => {
         <section className="footer-3">
           <h2>Mi Cuenta</h2>
           <p>
-            <a href="#">Regístrate</a>
+            <Link to="/register">Regístrate</Link>
           </p>
           <p>
-            <a href="#">Inicio de sesión</a>
+            <Link to="/login">Inicio de sesión</Link>
           </p>
-          <p>
+          {/* <p>
             <a href="#">Olvidaste tu contraseña</a>
-          </p>
+          </p> */}
         </section>
         <section className="footer-4">
           <h2>Siguenos en Redes Sociales</h2>
