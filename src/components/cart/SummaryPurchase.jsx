@@ -93,32 +93,13 @@ export const SummaryPurchase = () => {
                                 {product.descripcion}
                               </MDBTypography>
                             </MDBCol>
-                            {/* <MDBCol md="3" lg="3" xl="3" className="d-flex align-items-center">
-                      <MDBBtn type="button" color="link" className="px-2">
-                        <MDBIcon fas icon="minus"  />
-                      </MDBBtn>
-
-                      <MDBInput type="number" min="0" defaultValue={product.cantidad} size="sm" />
-
-                      <MDBBtn type="button" color="link" className="px-2" onClick={() => {alert(product)}}>
-                        <MDBIcon fas icon="plus" onClick={() => {alert(product)}}/>
-                      </MDBBtn>
-                    </MDBCol> */}
                             <MDBCol
                               md="3"
                               lg="3"
                               xl="3"
                               className="d-flex align-items-center"
                             >
-                              <ButtonGroup>
-                                <Button aria-label="reduce" >
-                                  <RemoveIcon fontSize="small" onClick={() => {removeFromCart(product)}}/>
-                                </Button>
-                                <Button>{product.cantidad}</Button>
-                                <Button aria-label="increase" onClick={() => {addToCart(product)}}>
-                                  <AddIcon fontSize="small" />
-                                </Button>
-                              </ButtonGroup>
+                              
                             </MDBCol>
 
                             <MDBCol md="3" lg="2" xl="2" className="text-end">

@@ -5,7 +5,7 @@ import { Logout } from "@mui/icons-material";
 import IconButton from '@mui/material/IconButton';
 import { styled } from '@mui/material/styles';
 import { useAuth } from "../../hooks/useAuth";
-import { useEffect } from "react";
+
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
@@ -22,23 +22,6 @@ export const BadgeButtonUser = () => {
 
     const navigate = useNavigate();
 
-    // const VerifyLogin =() =>{
-    //   console.log(`VerifyLogin.isAuthenticated: ${token}`)
-    //   if (isAuthenticated) {
-    //         //navigate("/");
-    //         setToken('');
-    //         setIsAuthenticated(false);
-    //       } else{
-    //         navigate(`/login/`);
-    //       }
-    // }
-    // useEffect(() => {
-    //   if (isAuthenticated) {
-    //     navigate("/");
-    //   } else{
-
-    //   }
-    // }, [isAuthenticated]);
   return (
     <IconButton aria-label="login">
       <StyledBadge  color="secondary">
@@ -47,8 +30,6 @@ export const BadgeButtonUser = () => {
           : 
           <LoginIcon color="action" onClick={()=> {navigate(`/login`)}} data-bs-toggle="tooltip" data-bs-placement="top" title="Iniciar Sesión"/>
         }
-        {/* <LoginIcon color="action" onClick={()=> {navigate(`/login/`)}}/>
-        <LoginIcon color="action"/> */}
       </StyledBadge>
     </IconButton>
   )

@@ -6,7 +6,7 @@ export const PayPalButton = ({ invoice, totalValue }) => {
     const { setPaypalStatus } = useAuth();
 
     const approve = async (data, actions) => {
-        alert('entro a approve')
+        //alert('entro a approve')
         try {
           const order = await actions.order?.capture ();
           console.log ('PAYPAL', order)
