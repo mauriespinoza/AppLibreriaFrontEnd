@@ -5,6 +5,11 @@
     /* height: 85px; */
     /* align-items:end; */
 }
+.navbar-brand{
+    color: #86486a94; 
+    font-size: 36px;
+    font-family: 'Delicious Handrawn', cursive;
+}
 #logo{
     height: 80px;
 }
@@ -15,3 +20,6 @@
     width: 45px;
     height: 45px;
 }
+/* Link{
+    color: #86486a94;
+} */

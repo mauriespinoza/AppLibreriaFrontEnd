@@ -45,9 +45,9 @@ export const NavBar = () => {
     <>
       <nav className="navbar navbar-expand-lg bg-body-">
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">
+          <Link className="navbar-brand" to="/">
             Candelabra
-          </a>
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
