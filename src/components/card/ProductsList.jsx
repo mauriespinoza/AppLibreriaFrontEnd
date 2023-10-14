@@ -64,7 +64,7 @@ export const ProductsList = () => {
               .slice(fisrstIndex, lastIndex)}
           </Row>
         </div>
-        <Pagination/>
+        {/* <Pagination/> */}
       </>
     );
   };

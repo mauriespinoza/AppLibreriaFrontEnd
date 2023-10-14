@@ -13,15 +13,15 @@ export const Footer = () => {
         </section>
         <section className="footer-2">
           <h2>Informacíon</h2>
-          <p>
+          {/* <p>
             <a href="#">Estado del pedido y pagos</a>
-          </p>
+          </p> */}
           <p>
             <a href="#">Preguntas Frecuentes</a>
           </p>
-          <p>
+          {/* <p>
             <a href="#">Costos de Envío</a>
-          </p>
+          </p> */}
           <p>
             <a href="#">Cambios y Devoluciones</a>
           </p>

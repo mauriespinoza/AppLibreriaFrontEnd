@@ -1,5 +1,6 @@
 
 import { Col, Button, Row, Container, Card, Form , Alert } from 'react-bootstrap';
+import { Link } from "react-router-dom";
 import { 
   MDBBtn, 
   MDBContainer, 
@@ -99,8 +100,11 @@ export const Registration = () => {
     }, [token]);
 
     useEffect(() => {
-      console.log("isAuthenticated:" + isAuthenticated)
-      if (isAuthenticated) navigate("/");
+      console.log("Register.isAuthenticated:" + isAuthenticated)
+      if (isAuthenticated) {
+        console.log("isAuthenticated2")
+        navigate("/");
+      }
     }, [isAuthenticated]);
 
   return (
@@ -237,9 +241,9 @@ export const Registration = () => {
               <div className="mt-3">
                        <p className="mb-0  text-center">
                          Ya tienes una cuenta?{' '}
-                        <a href="/login" className="text-primary fw-bold">
+                        <Link to="/login" className="text-primary fw-bold">
                            Login
-                         </a>
+                         </Link>
                       </p>
                     </div>
             </MDBCol>

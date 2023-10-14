@@ -21,21 +21,32 @@ footer{
     padding-left: 80px;
   }
   .footer-1 {
-    
+    color: #86486a94; 
+    font-size: 40px;
+    font-family: 'Delicious Handrawn', cursive;
   }
-  
+  .footer-2 {
+    color: #86486a94; 
+    font-size: 40px;
+    font-family: 'Delicious Handrawn', cursive;
+  }
   .footer-2 a{
     font-size:1.2rem;
     color: #696e74;
   }
-  
+  .footer-3 {
+    color: #86486a94; 
+    font-size: 40px;
+    font-family: 'Delicious Handrawn', cursive;
+  }
   .footer-3 a{
     font-size:1.2rem;
     color: #696e74;
   }
   .footer-4 {
     font-size:1.0rem;
-    color: #696e74;
+    color: #86486a94;
+    font-family: 'Delicious Handrawn', cursive;
   }
   .footer-4 img{
     width: 50px;

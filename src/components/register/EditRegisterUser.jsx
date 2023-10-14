@@ -17,9 +17,9 @@ import { useNavigate } from "react-router-dom";
 export const EditRegisterUser = () => {
    const  {user,token}   = useAuth();
    const navigate= useNavigate();
-   console.log("user", user.userdata)
-   console.log("token",token);
-   const {rut,nombre,apellido, edad,correo}= user.userdata;
+   //console.log("user", user.userdata)
+   //console.log("token",token);
+   //const {rut,nombre,apellido, edad,correo}= user.userdata;
   // const {rut, nombre, apellido, edad, correo} = user;
   
   //const [name, setName] = useState('rut');
@@ -27,14 +27,14 @@ export const EditRegisterUser = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const updatedUser = { ...name, email };
+    //const updatedUser = { ...name, email };
     //updateUser(updatedUser);
   };
   useEffect(()=> {
-    if(!token){
+    if(user===null){
       navigate("/login")
     }
-  },[token]);
+  },[user]);
   
   return (
     <>
@@ -59,7 +59,7 @@ export const EditRegisterUser = () => {
                   id="rut"
                   type="text"
                   disabled="true"
-                  value={rut}
+                  value={user ? user.userdata.rut : ''}
                 />
 
                 <MDBInput
@@ -67,7 +67,7 @@ export const EditRegisterUser = () => {
                   label="Nombre"
                   id="nombre"
                   type="text"
-                  value={nombre}
+                  value={user ? user.userdata.nombre : ''}
                 />
 
                 <MDBInput
@@ -75,7 +75,7 @@ export const EditRegisterUser = () => {
                   label="Apellido"
                   id="apellido"
                   type="text"
-                  value={apellido}
+                  value={user ? user.userdata.apellido : ''}
                 />
 
                 <MDBRow>
@@ -86,7 +86,7 @@ export const EditRegisterUser = () => {
                       id="email"
                       type="text"
                       required={true}
-                      value={correo}
+                      value={user ? user.userdata.correo : ''}
                     />
                   </MDBCol>
 
@@ -96,7 +96,7 @@ export const EditRegisterUser = () => {
                       label="Edad"
                       id="edad"
                       type="text"
-                      value={edad}
+                      value={user ? user.userdata.edad : ''}
                     />
                   </MDBCol>
                 </MDBRow>
