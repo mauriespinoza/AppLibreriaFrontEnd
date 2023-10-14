@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import { Form, Alert } from "react-bootstrap";
 import {
@@ -11,22 +11,31 @@ import {
   MDBCardImage,
   MDBInput
 } from "mdb-react-ui-kit";
+import { useNavigate } from "react-router-dom";
 
 
 export const EditRegisterUser = () => {
-   const  {user}   = useAuth();
+   const  {user,token}   = useAuth();
+   const navigate= useNavigate();
    console.log("user", user.userdata)
+   console.log("token",token);
    const {rut,nombre,apellido, edad,correo}= user.userdata;
   // const {rut, nombre, apellido, edad, correo} = user;
   
-  const [name, setName] = useState('rut');
-  const [email, setEmail] = useState("lucas@hhh.cl");
+  //const [name, setName] = useState('rut');
+  //const [email, setEmail] = useState("lucas@hhh.cl");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const updatedUser = { ...name, email };
     //updateUser(updatedUser);
   };
+  useEffect(()=> {
+    if(!token){
+      navigate("/login")
+    }
+  },[token]);
+  
   return (
     <>
       <MDBContainer fluid>

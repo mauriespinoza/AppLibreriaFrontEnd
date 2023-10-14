@@ -76,6 +76,9 @@ export const ProductDetails = () => {
           <Typography component="div" variant="h4" color="orange">
           $ {FormatCLP(product.valor)}
           </Typography>
+          <Typography variant="p" fontWeight='bold' color="text.secondary" component="p">
+           Disponibilidad: <Typography component='span'>Solo retiro en tienda</Typography>
+          </Typography>
           <ButtonGroup>
           {/* <Button
             aria-label="reduce"
