@@ -98,7 +98,7 @@ export const NavBar = () => {
                 <></>
               )}
             </ul>
-            <form className="d-flex" role="search">
+            {/* <form className="d-flex" role="search">
               <input
                 className="form-control me-2"
                 type="search"
@@ -107,7 +107,7 @@ export const NavBar = () => {
               />
 
               <BadgeButtonSearch />
-            </form>
+            </form> */}
             <div>
               <BadgeButtonUser />
             </div>
