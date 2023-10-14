@@ -40,7 +40,7 @@ export const ModalDialog = () => {
         Pagar
       </MDBBtn>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Subscribe</DialogTitle>
+        <DialogTitle>Candelabra</DialogTitle>
         <DialogContent>
           <DialogContentText>
             Para realizar el pago debes estar logueado o ingresar un email

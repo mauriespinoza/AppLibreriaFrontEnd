@@ -110,17 +110,7 @@ export const CartItems = () => {
                                 {product.descripcion}
                               </MDBTypography>
                             </MDBCol>
-                            {/* <MDBCol md="3" lg="3" xl="3" className="d-flex align-items-center">
-                      <MDBBtn type="button" color="link" className="px-2">
-                        <MDBIcon fas icon="minus"  />
-                      </MDBBtn>
 
-                      <MDBInput type="number" min="0" defaultValue={product.cantidad} size="sm" />
-
-                      <MDBBtn type="button" color="link" className="px-2" onClick={() => {alert(product)}}>
-                        <MDBIcon fas icon="plus" onClick={() => {alert(product)}}/>
-                      </MDBBtn>
-                    </MDBCol> */}
                             <MDBCol
                               md="3"
                               lg="3"
@@ -183,27 +173,6 @@ export const CartItems = () => {
                             ${FormatCLP(cartTotal)}
                           </MDBTypography>
                         </div>
-
-                        {/* <MDBTypography tag="h5" className="text-uppercase mb-3">
-                    Shipping
-                  </MDBTypography> */}
-
-                        {/* <div className="mb-4 pb-2">
-                    <select className="select p-2 rounded bg-grey" style={{ width: "100%" }}>
-                      <option value="1">Standard-Delivery- €5.00</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
-                      <option value="4">Four</option>
-                    </select>
-                  </div> */}
-                        {/* 
-                  <MDBTypography tag="h5" className="text-uppercase mb-3">
-                    Give code
-                  </MDBTypography>
-
-                  <div className="mb-5">
-                    <MDBInput size="lg" label="Enter your code" />
-                  </div> */}
 
                         <hr className="my-4" />
 
