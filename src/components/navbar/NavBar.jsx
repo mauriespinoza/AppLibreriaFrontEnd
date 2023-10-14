@@ -96,9 +96,9 @@ export const NavBar = () => {
               </li>
               {token != "" ? (
                 <li className="nav-item">
-                  <a className="nav-link" href="/datos">
+                  <Link className="nav-link" to="/datos">
                     Mi Cuenta
-                  </a>
+                  </Link>
                 </li>
               ) : (
                 <></>

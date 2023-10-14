@@ -1,5 +1,6 @@
 import { Alert, CardImg } from "react-bootstrap";
 import { useProduct } from "../../hooks/useProduct";
+import { useEffect } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import { PayPalButton } from "../paypal/PaypalButton"
 import {
@@ -20,11 +21,14 @@ import ButtonGroup from "@mui/material/ButtonGroup";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import "./cartItems.css";
+import { ModalDialog } from "../modals/ModalDialog";
+import { useState } from "react";
 export const CartItems = () => {
 
   const { cart, removeFromCart, addToCart } = useProduct();
+  const [statusModal, setStatusModal]= useState(false);
 
-  const { signin, isAuthenticated, token, errors, paypalStatus } = useAuth();
+  const { signin, isAuthenticated, token, errors, paypalStatus, mailGuess } = useAuth();
  console.log(`CartItem.token: ${token}`)
   let cartTotal = cart.reduce(
     (acumulador, actual) => acumulador + actual.total,
@@ -49,6 +53,14 @@ export const CartItems = () => {
     return new Intl.NumberFormat().format(price);
   }
   console.log("cartItems: " + JSON.stringify(cart));
+
+  useEffect (() =>{
+    if(mailGuess){
+      console.log('mailGuess: ' + mailGuess)
+    } else {
+      console.log('nomailGuess: ' + mailGuess)
+    }
+  }, [''])
   return (
     <>
       <section className="h-100 h-custom" style={{ backgroundColor: "#eee" }}>
@@ -68,7 +80,7 @@ export const CartItems = () => {
                             tag="h1"
                             className="fw-bold mb-0 text-black"
                           >
-                            Carrito de Compras
+                            Carro de Compras
                           </MDBTypography>
                           <MDBTypography className="mb-0 text-muted">
                             {"Items: " + cartCantidad}
@@ -219,11 +231,20 @@ export const CartItems = () => {
                             </Alert>
                           ))}
                         {token ? <PayPalButton invoice = {'Productos'} totalValue={cartTotal}/>
-                        :
+                        :  !mailGuess ?
+                          <ModalDialog/> : <PayPalButton invoice = {'Productos'} totalValue={cartTotal}/>
                         
-                        <MDBBtn color="primary" block size="lg">
-                        PAGAR
-                      </MDBBtn>
+                        
+                        // <div className="d-flex justify-content-between mb-5">
+                        //   <MDBTypography tag="h5" className="text-uppercase">
+                        //     ¿Desea iniciar Sesion para realizar el pago?
+                        //   </MDBTypography>
+                        //   <ModalDialog/>
+                        // </div>
+                      //   <MDBBtn color="primary" block size="lg" onClick={()=>setStatusModal(true)}>
+                      //   PAGAR
+                      // </MDBBtn>
+                          
                         }
                         
                       </div>

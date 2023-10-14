@@ -12,6 +12,7 @@ export const AuthProvider = ({ children }) => {
   const [errors, setErrors] = useState([]);
   const navigate = useNavigate();
   const [paypalStatus, setPaypalStatus]= useState([]);
+  const [mailGuess, setMailGuess] = useState('');
 
   const signin = async (user) => {
     try {
@@ -57,7 +58,7 @@ export const AuthProvider = ({ children }) => {
     }
 
   }, [errors]);
-  
+
   const singup = async (user) => {
     try{
       console.log(`singup: ${user}`)
@@ -108,6 +109,8 @@ export const AuthProvider = ({ children }) => {
         errors,
         setPaypalStatus,
         paypalStatus,
+        mailGuess,
+        setMailGuess,
       }}>
         {children}
       </AuthContext.Provider>

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useAuth } from "../../hooks/useAuth";
 import { Form, Alert } from "react-bootstrap";
 import {
   MDBBtn,
@@ -13,7 +14,12 @@ import {
 
 
 export const EditRegisterUser = () => {
-  const [name, setName] = useState("lucas");
+   const  {user}   = useAuth();
+   console.log("user", user.userdata)
+   const {rut,nombre,apellido, edad,correo}= user.userdata;
+  // const {rut, nombre, apellido, edad, correo} = user;
+  
+  const [name, setName] = useState('rut');
   const [email, setEmail] = useState("lucas@hhh.cl");
 
   const handleSubmit = (e) => {
@@ -44,6 +50,7 @@ export const EditRegisterUser = () => {
                   id="rut"
                   type="text"
                   disabled="true"
+                  value={rut}
                 />
 
                 <MDBInput
@@ -51,6 +58,7 @@ export const EditRegisterUser = () => {
                   label="Nombre"
                   id="nombre"
                   type="text"
+                  value={nombre}
                 />
 
                 <MDBInput
@@ -58,6 +66,7 @@ export const EditRegisterUser = () => {
                   label="Apellido"
                   id="apellido"
                   type="text"
+                  value={apellido}
                 />
 
                 <MDBRow>
@@ -68,6 +77,7 @@ export const EditRegisterUser = () => {
                       id="email"
                       type="text"
                       required={true}
+                      value={correo}
                     />
                   </MDBCol>
 
@@ -77,6 +87,7 @@ export const EditRegisterUser = () => {
                       label="Edad"
                       id="edad"
                       type="text"
+                      value={edad}
                     />
                   </MDBCol>
                 </MDBRow>
