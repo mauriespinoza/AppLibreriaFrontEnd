@@ -8,6 +8,7 @@ export const AuthProvider = ({ children }) => {
   
   const [token, setToken]= useState(localStorage.getItem("Token") ? JSON.parse(localStorage.getItem("Token")) : '');
   const [user, setUser] = useState(null);
+  const [stateTrn, setStateTrn] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [errors, setErrors] = useState([]);
   const navigate = useNavigate();
@@ -39,25 +40,27 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const updateUser = async () => {
+  const updateUser = async (user) => {
     try {
-      const response = await axiosClient.post("/login",user);
-      console.log(`signin.response.token: ${JSON.stringify(response.data)}`)
+      console.log("updateUser.token", token)
+      const response = await axiosClient.put(`/users/${user.rut}`,user,{
+        headers:{
+          "Authorization" : token.value,
+          "Content-Type": "application/json"
+        },
+      });
+      console.log(`updateUser.response: ${JSON.stringify(response.data)}`)
       if(response.data){
-        setToken(response.data);
-        //setErrors([response.data.message]);
-        setUser(response.data.userdata);
-        setIsAuthenticated(true);
-        setUser(response.data);
+        console.log("updateUser",response.data)
+        setStateTrn(true)
         return true;
-       // localStorage.setItem("Token",response.data);
       } else {
-        setToken('');
+        setStateTrn(false)
         return false;
-        //localStorage.setItem("Token",'');
       }
       
     } catch (error) {
+      setStateTrn(false)
       console.log("sign.exception: " + error)
       setErrors([error.response.data.message]);
       return false;
@@ -135,6 +138,8 @@ export const AuthProvider = ({ children }) => {
         paypalStatus,
         mailGuess,
         setMailGuess,
+        updateUser,
+        stateTrn,
       }}>
         {children}
       </AuthContext.Provider>

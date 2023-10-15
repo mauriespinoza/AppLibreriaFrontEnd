@@ -30,3 +30,6 @@ Card{
 .price{
     color: orangered;
 }
+.btn btn-primary{
+    font-family: 'Delicious Handrawn', cursive;
+}
