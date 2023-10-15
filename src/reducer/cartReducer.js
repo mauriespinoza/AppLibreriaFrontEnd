@@ -47,6 +47,7 @@ export const cartReducer = (state, action) => {
               ...item,
               cantidad: item.cantidad + count,
               total: (item.cantidad + count) * item.valor,
+              // total: item.valor * count,
             };
           }
           setCount(1);

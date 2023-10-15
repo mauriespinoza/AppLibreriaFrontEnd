@@ -1,13 +1,13 @@
 import { Alert } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import { useProduct } from "../../hooks/useProduct";
 import { useEffect } from "react";
 import { useAuth } from "../../hooks/useAuth";
-import { PayPalButton } from "../paypal/PaypalButton"
+import { PayPalButton } from "../paypal/PaypalButton";
 import {
   MDBCard,
   MDBCardBody,
   MDBCardImage,
-  MDBCardText,
   MDBCol,
   MDBContainer,
   MDBIcon,
@@ -20,14 +20,13 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import "./cartItems.css";
 import { ModalDialog } from "../modals/ModalDialog";
-import { useState } from "react";
+
 export const CartItems = () => {
 
   const { cart, removeFromCart, addToCart } = useProduct();
-  // const [statusModal, setStatusModal]= useState(false);
 
   const { token, paypalStatus, mailGuess } = useAuth();
- console.log(`CartItem.token: ${token}`)
+
   let cartTotal = cart.reduce(
     (acumulador, actual) => acumulador + actual.total,
     0
@@ -37,28 +36,18 @@ export const CartItems = () => {
     (acumulador, actual) => acumulador + actual.cantidad,
     0
   );
-  // const messageStatus =() =>{
-  //   const {status, messagge } = paypalStatus;
-  //   console.log('messageStatus.status: ' +status)
-  //   if(status == 'success'){
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // }
 
   function FormatCLP(price) {
     return new Intl.NumberFormat().format(price);
   }
-  console.log("cartItems: " + JSON.stringify(cart));
 
-  useEffect (() =>{
-    if(mailGuess){
-      console.log('mailGuess: ' + mailGuess)
+  useEffect(() => {
+    if (mailGuess) {
+      console.log("mailGuess: " + mailGuess);
     } else {
-      console.log('nomailGuess: ' + mailGuess)
+      console.log("nomailGuess: " + mailGuess);
     }
-  }, [''])
+  }, [""]);
   return (
     <>
       <section className="h-100 h-custom" style={{ backgroundColor: "#eee" }}>
@@ -118,11 +107,21 @@ export const CartItems = () => {
                               className="d-flex align-items-center"
                             >
                               <ButtonGroup>
-                                <Button aria-label="reduce" >
-                                  <RemoveIcon fontSize="small" onClick={() => {removeFromCart(product)}}/>
+                                <Button aria-label="reduce">
+                                  <RemoveIcon
+                                    fontSize="small"
+                                    onClick={() => {
+                                      removeFromCart(product);
+                                    }}
+                                  />
                                 </Button>
                                 <Button>{product.cantidad}</Button>
-                                <Button aria-label="increase" onClick={() => {addToCart(product)}}>
+                                <Button
+                                  aria-label="increase"
+                                  onClick={() => {
+                                    addToCart(product);
+                                  }}
+                                >
                                   <AddIcon fontSize="small" />
                                 </Button>
                               </ButtonGroup>
@@ -146,10 +145,10 @@ export const CartItems = () => {
 
                         <div className="pt-5">
                           <MDBTypography tag="h6" className="mb-0">
-                            <MDBCardText tag="a" href="/" className="text-body">
+                            <Link to="/" className="text-body">
                               <MDBIcon fas icon="long-arrow-alt-left me-2" />{" "}
                               Volver a Comprar
-                            </MDBCardText>
+                            </Link>
                           </MDBTypography>
                         </div>
                       </div>
@@ -184,36 +183,29 @@ export const CartItems = () => {
                             ${FormatCLP(cartTotal)}
                           </MDBTypography>
                         </div>
-                        {/* { 
-                           messageStatus && <Alert>Hola
-                          </Alert>} */}
-                          {paypalStatus.map((paypal, i) => (
-                            <Alert
-                              sx={{ mb: 1 }}
-                              variant={paypal.status}
-                              key={i}
-                              severity={''}
-                            >
-                              {paypal.messagge}
-                            </Alert>
-                          ))}
-                        {token ? <PayPalButton invoice = {'Productos'} totalValue={cartTotal}/>
-                        :  !mailGuess ?
-                          <ModalDialog/> : <PayPalButton invoice = {'Productos'} totalValue={cartTotal}/>
-                        
-                        
-                        // <div className="d-flex justify-content-between mb-5">
-                        //   <MDBTypography tag="h5" className="text-uppercase">
-                        //     ¿Desea iniciar Sesion para realizar el pago?
-                        //   </MDBTypography>
-                        //   <ModalDialog/>
-                        // </div>
-                      //   <MDBBtn color="primary" block size="lg" onClick={()=>setStatusModal(true)}>
-                      //   PAGAR
-                      // </MDBBtn>
-                          
-                        }
-                        
+                        {paypalStatus.map((paypal, i) => (
+                          <Alert
+                            sx={{ mb: 1 }}
+                            variant={paypal.status}
+                            key={i}
+                            severity={""}
+                          >
+                            {paypal.messagge}
+                          </Alert>
+                        ))}
+                        {token ? (
+                          <PayPalButton
+                            invoice={"Productos"}
+                            totalValue={cartTotal}
+                          />
+                        ) : !mailGuess ? (
+                          <ModalDialog />
+                        ) : (
+                          <PayPalButton
+                            invoice={"Productos"}
+                            totalValue={cartTotal}
+                          />
+                        )}
                       </div>
                     </MDBCol>
                   </MDBRow>
