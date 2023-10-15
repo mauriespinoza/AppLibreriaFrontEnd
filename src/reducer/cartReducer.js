@@ -1,5 +1,5 @@
-export const cartInitialState = JSON.parse(localStorage.getItem("cartItems")) || []
-
+// export const cartInitialState = JSON.parse( localStorage.getItem("cartItems")) || []
+export const cartInitialState = localStorage.getItem("cartItems") ? JSON.parse(localStorage.getItem("cartItems")) : [];
 export const cartReducer = (state, action) => {
 
     const { type: actionType, payload: actionPayload } = action;
@@ -65,11 +65,13 @@ export const cartReducer = (state, action) => {
       const { _id, valor, cantidad } = actionPayload;
       console.log("_idPayload: " + _id)
       const existItem = state.find((item) => item._id === _id);
+      
       //const stockProduct = state.find((prod) => prod._id === _id);
       console.log("stockProduct: " + cantidad);
       console.log("existItem: " + existItem)
       if (existItem) {
         if(existItem.cantidad === 1){
+          console.log("REMOVE_ITEMS_CART.return", state.filter((item) => item._id !== _id))
           return state.filter((item) => item._id !== _id);
         } else{
           return state.map((item) => {
@@ -86,6 +88,9 @@ export const cartReducer = (state, action) => {
         
       } 
       return state;
+    }
+    case "CLEAR_CART":{
+        return []
     }
     default:
       return state;

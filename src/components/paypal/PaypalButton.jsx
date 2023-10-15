@@ -3,15 +3,18 @@ import { useAuth } from "../../hooks/useAuth";
 
 export const PayPalButton = ({ invoice, totalValue }) => {
 
-    const { setPaypalStatus } = useAuth();
+    const { setPaypalStatus, setIdPaypal } = useAuth();
 
     const approve = async (data, actions) => {
         //alert('entro a approve')
         try {
           const order = await actions.order?.capture ();
+          const {id}= order;
           console.log ('PAYPAL', order)
-          setPaypalStatus([{status: 'success' ,messagge: 'Pago Exitoso'}]);
+          console.log ('PAYPAL.id', id)
+          setPaypalStatus([{status: 'success' ,messagge: 'Pago Exitoso, en unos segundos serás redirigido a la página principal'}]);
           //alert(`order: ${order}`)
+          setIdPaypal(id);
           
           }
         catch (error) {

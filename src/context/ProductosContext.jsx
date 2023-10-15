@@ -23,8 +23,11 @@ const useCartReducer = () => {
       type: "REMOVE_ITEMS_CART",
       payload: product,
     });
-
-  return { cartState, addToCart, removeFromCart, addQtyToCart };
+  const clearCart = () => 
+    cartDispatch({
+      type: "CLEAR_CART",
+    });
+  return { cartState, addToCart, removeFromCart, addQtyToCart, clearCart };
 };
 
 
@@ -35,7 +38,8 @@ export const ProductosProvider = ({ children }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [countProduct, setCountProduct] = useState(1);
   const [count,setCount] = useState(1);
-  const { cartState, addToCart, removeFromCart, addQtyToCart } = useCartReducer();
+  const { cartState, addToCart, removeFromCart, addQtyToCart, clearCart } = useCartReducer();
+  
 
   const getProducts = async () => {
     try {
@@ -88,6 +92,7 @@ export const ProductosProvider = ({ children }) => {
         count,
         setCount,
         addQtyToCart,
+        clearCart,
       }}
     >
       {children}

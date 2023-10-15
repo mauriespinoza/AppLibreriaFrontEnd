@@ -7,13 +7,14 @@ export const AuthProvider = ({ children }) => {
 
   
   const [token, setToken]= useState(localStorage.getItem("Token") ? JSON.parse(localStorage.getItem("Token")) : '');
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(localStorage.getItem("LSUserData") ? JSON.parse(localStorage.getItem("LSUserData")) : '' );
   const [stateTrn, setStateTrn] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [errors, setErrors] = useState([]);
   const navigate = useNavigate();
   const [paypalStatus, setPaypalStatus]= useState([]);
   const [mailGuess, setMailGuess] = useState('');
+  const [idPaypal,setIdPaypal]=useState('');
 
   const signin = async (user) => {
     try {
@@ -24,7 +25,7 @@ export const AuthProvider = ({ children }) => {
         //setErrors([response.data.message]);
         setUser(response.data.userdata);
         setIsAuthenticated(true);
-        setUser(response.data);
+        //setUser(response.data);
         return true;
        // localStorage.setItem("Token",response.data);
       } else {
@@ -36,6 +37,7 @@ export const AuthProvider = ({ children }) => {
     } catch (error) {
       console.log("sign.exception: " + error)
       setErrors([error.response.data.message]);
+      setUser('');
       return false;
     }
   };
@@ -66,6 +68,11 @@ export const AuthProvider = ({ children }) => {
       return false;
     }
   }
+
+  const clearCart =() =>{
+    localStorage.setItem("cartItems", []);
+    setIdPaypal(null);
+  }
   useEffect(() => {
     localStorage.setItem("Token",JSON.stringify(token) ?? '' )
   }, [token])
@@ -86,6 +93,46 @@ export const AuthProvider = ({ children }) => {
 
   }, [errors]);
 
+  useEffect(() => {
+
+    if(stateTrn !== null){
+
+    
+    if (stateTrn) {
+
+      const timer = setTimeout(() => {
+
+        setStateTrn(null);
+
+      }, 5000);
+
+      return () => clearTimeout(timer);
+
+    }
+  }
+  }, [stateTrn]);
+
+  useEffect(() => {
+
+    if(idPaypal !== null){
+
+    
+    if (idPaypal) {
+
+      const timer = setTimeout(() => {
+
+        //setIdPaypal(null);
+        // clearCart();
+        // navigate("/");
+
+      }, 7000);
+
+      return () => clearTimeout(timer);
+
+    }
+  }
+  }, [idPaypal]);
+
   const singup = async (user) => {
     try{
       console.log(`singup: ${user}`)
@@ -94,13 +141,11 @@ export const AuthProvider = ({ children }) => {
       if(response.data){
         setUser(response.data);
         setToken(response.data.token);
-        //setErrors([response.data.message]);
         setIsAuthenticated(true);
         return true;
       } else {
         setUser(null);
         setToken('');
-        //setErrors([response.data.message]);
         setIsAuthenticated(false);
         return false;
       }
@@ -118,6 +163,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem("Token", '');
     setIsAuthenticated(false);
     setToken('');
+    setUser('');
     navigate("/login");
   }
   return (
@@ -140,6 +186,8 @@ export const AuthProvider = ({ children }) => {
         setMailGuess,
         updateUser,
         stateTrn,
+        setIdPaypal,
+        idPaypal,
       }}>
         {children}
       </AuthContext.Provider>

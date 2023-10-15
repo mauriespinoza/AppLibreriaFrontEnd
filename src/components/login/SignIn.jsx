@@ -131,7 +131,7 @@ export const SignIn = () => {
               {/* <Link href="/register" variant="body2">
                 {"Registrate"}
               </Link> */}
-              <Button onClick={()=>  (navigate("/register" ), setErrors([]))}  variant="body2">
+              <Button onClick={()=>  (navigate("/register" ), setErrors([]))}  variant="text">
                 {"Registrate"}
               </Button>
             </Grid>

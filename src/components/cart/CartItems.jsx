@@ -4,9 +4,11 @@ import { useProduct } from "../../hooks/useProduct";
 import { useEffect } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import { PayPalButton } from "../paypal/PaypalButton";
+import { useNavigate } from "react-router-dom";
 import {
   MDBCard,
   MDBCardBody,
+  MDBBtn,
   MDBCardImage,
   MDBCol,
   MDBContainer,
@@ -22,10 +24,11 @@ import "./cartItems.css";
 import { ModalDialog } from "../modals/ModalDialog";
 
 export const CartItems = () => {
+  const { cart, removeFromCart, addToCart, clearCart } = useProduct();
 
-  const { cart, removeFromCart, addToCart } = useProduct();
-
-  const { token, paypalStatus, mailGuess } = useAuth();
+  const { token, paypalStatus, mailGuess, idPaypal, setIdPaypal, setPaypalStatus } = useAuth();
+ console.log("idPaypal",idPaypal);
+  const navigate = useNavigate();
 
   let cartTotal = cart.reduce(
     (acumulador, actual) => acumulador + actual.total,
@@ -40,14 +43,28 @@ export const CartItems = () => {
   function FormatCLP(price) {
     return new Intl.NumberFormat().format(price);
   }
-
+ 
+  const onClickHandle =() => {
+    clearCart();
+    setIdPaypal(null);
+    setPaypalStatus([]);
+    navigate("/");
+  }
   useEffect(() => {
-    if (mailGuess) {
+    if (idPaypal) {
       console.log("mailGuess: " + mailGuess);
+      const timer = setTimeout(() => {
+        setPaypalStatus([]);
+        setIdPaypal(null);
+         clearCart();
+        navigate("/");
+
+      }, 7000);
+      return () => clearTimeout(timer);
     } else {
       console.log("nomailGuess: " + mailGuess);
     }
-  }, [""]);
+  }, [idPaypal]);
   return (
     <>
       <section className="h-100 h-custom" style={{ backgroundColor: "#eee" }}>
@@ -145,10 +162,13 @@ export const CartItems = () => {
 
                         <div className="pt-5">
                           <MDBTypography tag="h6" className="mb-0">
-                            <Link to="/" className="text-body">
+                            {
+                              !idPaypal ? <Link to="/" className="text-body">
                               <MDBIcon fas icon="long-arrow-alt-left me-2" />{" "}
                               Volver a Comprar
-                            </Link>
+                            </Link> : null
+                            }
+                            
                           </MDBTypography>
                         </div>
                       </div>
@@ -194,10 +214,14 @@ export const CartItems = () => {
                           </Alert>
                         ))}
                         {token ? (
-                          <PayPalButton
-                            invoice={"Productos"}
-                            totalValue={cartTotal}
-                          />
+                          !idPaypal ? (
+                            <PayPalButton
+                              invoice={"Productos"}
+                              totalValue={cartTotal}
+                            />
+                          ) : <MDBBtn variant="outlined" color="primary" block size="lg" onClick= {onClickHandle}>
+                                Volver al Menu
+                            </MDBBtn>
                         ) : !mailGuess ? (
                           <ModalDialog />
                         ) : (
@@ -206,6 +230,21 @@ export const CartItems = () => {
                             totalValue={cartTotal}
                           />
                         )}
+                        {/* {token ? (
+                            <PayPalButton
+                              invoice={"Productos"}
+                              totalValue={cartTotal}
+                            />
+                          ) : !mailGuess ? (
+                            <ModalDialog />
+                          ) : (
+                            
+                            <PayPalButton
+                              invoice={"Productos"}
+                              totalValue={cartTotal}
+                              disabled={true}
+                            />
+                          )} */}
                       </div>
                     </MDBCol>
                   </MDBRow>

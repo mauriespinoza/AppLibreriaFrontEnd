@@ -14,17 +14,18 @@ import { useState, useEffect } from "react";
 import { Alert } from "react-bootstrap";
 
 export const InfoUser = () => {
-  const { user, stateTrn , updateUser} = useAuth();
+  const { user, stateTrn, updateUser,token } = useAuth();
+ console.log("user",user.nombre);
+  const [variantlbl, setVariantlbl] = useState("");
 
-  const [variantlbl, setVariantlbl] = useState(''); 
-
-  const [message, setMessage] = useState('')
-
+  const [message, setMessage] = useState("");
+  console.log("token", token.userdata);
+//  const {rutls,nombrels,apellidols,edadls,correols} = token.
   const [data, setData] = useState({
-    nombre: user.userdata.nombre ? user.userdata.nombre : "",
-    apellido: user.userdata.apellido ? user.userdata.apellido : "",
-    correo: user.userdata.correo ? user.userdata.correo : "",
-    edad: user.userdata.edad ? user.userdata.edad : "",
+    nombre: user.nombre ? user.nombre : token.userdata.nombre,
+    apellido: user.apellido ? user.apellido : token.userdata.apellido,
+    correo: user.correo ? user.correo : token.userdata.correo,
+    edad: user.edad ? user.edad : token.userdata.edad,
   });
 
   console.log("user", data.nombre);
@@ -58,16 +59,17 @@ export const InfoUser = () => {
 
   useEffect(() => {
     if (stateTrn === true) {
-      setVariantlbl('success')
-      setMessage('Datos actualizados correctamente')
-    } else if(stateTrn === false){
-      setVariantlbl('danger')
-      setMessage('Tuvimos un inconveniente para actualizar tus datos')
+      setVariantlbl("success");
+      setMessage("Datos actualizados correctamente");
+    } else if (stateTrn === false) {
+      setVariantlbl("danger");
+      setMessage("Tuvimos un inconveniente para actualizar tus datos");
     } else {
-      setVariantlbl('')
-      setMessage('')
+      setVariantlbl("");
+      setMessage("");
     }
   }, [stateTrn]);
+
 
 
   return (
@@ -101,14 +103,14 @@ export const InfoUser = () => {
                         </div>
                         <hr className="my-5" />
                         <MDBRow className="mb-4 d-flex justify-content-between align-items-center">
-                          <MDBCol md="2" lg="4" xl="12">
+                          <MDBCol sx="4" md="12" lg="12" xl="12">
                             <MDBInput
                               wrapperClass="mb-4"
                               label="Rut"
                               name="rut"
                               type="text"
                               // disabled="true"
-                              value={user ? user.userdata.rut : ""}
+                              value={user ? user.rut : token.userdata.rut}
                             />
                             <MDBInput
                               wrapperClass="mb-4"
@@ -129,6 +131,9 @@ export const InfoUser = () => {
                               name="apellido"
                               type="text"
                               value={data.apellido}
+                              onChange={(e) => {
+                                onChangeInput(e);
+                              }}
                             />
                             <MDBRow>
                               <MDBCol md="8">
@@ -140,6 +145,9 @@ export const InfoUser = () => {
                                   type="text"
                                   required={true}
                                   value={data.correo}
+                                  onChange={(e) => {
+                                    onChangeInput(e);
+                                  }}
                                 />
                               </MDBCol>
 
@@ -151,25 +159,31 @@ export const InfoUser = () => {
                                   name="edad"
                                   type="text"
                                   value={data.edad}
+                                  onChange={(e) => {
+                                    onChangeInput(e);
+                                  }}
                                 />
                               </MDBCol>
                             </MDBRow>
                             <div className="text-center">
-                              <MDBBtn type="submit" color="primary" size="lg">
-                                Guardar Cambios
-                              </MDBBtn>
-                              <div>
-                              {stateTrn ? 
-                                    <Alert
-                                      sx={{ mb: 1 }}
-                                      variant={variantlbl}
-                                      severity={""}
-                                    >
-                                      {message}
-                                    </Alert>
-                                    : null
-                                }
-                                </div>
+                            <MDBRow>
+                                {stateTrn ? (
+                                  <Alert
+                                    sx={{ mb: 1 }}
+                                    variant={variantlbl}
+                                    severity={""}
+                                  >
+                                    {message}
+                                  </Alert>
+                                ) : null}
+                              </MDBRow>
+                              <MDBRow>
+                                <MDBBtn type="submit" color="primary" size="lg">
+                                  Guardar Cambios
+                                </MDBBtn>
+                              </MDBRow>
+                              <br />
+                              
                             </div>
                           </MDBCol>
                         </MDBRow>
