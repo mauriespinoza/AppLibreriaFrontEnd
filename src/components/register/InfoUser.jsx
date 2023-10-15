@@ -9,9 +9,35 @@ import {
   MDBInput,
 } from "mdb-react-ui-kit";
 import { Form } from "react-bootstrap";
+import { useAuth } from "../../hooks/useAuth";
 
 export const InfoUser = () => {
 
+    const  {user,token}   = useAuth();
+    const onSubmitData = (event) => {
+
+        event.preventDefault();
+
+        const data = new FormData(event.currentTarget);
+        
+        console.log("data: " + data.get("password"))
+        
+        const userData = {
+          nombre : data.get("nombre"),
+          apellido: data.get("apellido"),
+          rut: data.get("rut"),
+          edad: data.get("edad"),
+          correo: data.get("email"),
+          password: data.get("password"),
+        };
+        console.log("requestRegister: " + JSON.stringify(userData))
+        const userResponse = singup(userData)
+        console.log(`userResponse: ${JSON.stringify(userResponse)}`)
+        //setVariantlbl("success");
+        console.log("userResponse: " + userResponse)
+        console.log("errors" + errors)
+ 
+    }
   return (
     <section className="h-100 h-custom" style={{ backgroundColor: "#eee" }}>
       <MDBContainer className="py-5 h-100">
@@ -46,14 +72,14 @@ export const InfoUser = () => {
                             id="rut"
                             type="text"
                             disabled="true"
-                            //   value={user ? user.userdata.rut : ''}
+                            value={user ? user.userdata.rut : ''}
                           />
                           <MDBInput
                             wrapperClass="mb-4"
                             label="Nombre"
                             id="nombre"
                             type="text"
-                            //   value={user ? user.userdata.nombre : ''}
+                            value={user ? user.userdata.nombre : ''}
                           />
 
                           <MDBInput
@@ -61,7 +87,7 @@ export const InfoUser = () => {
                             label="Apellido"
                             id="apellido"
                             type="text"
-                            //   value={user ? user.userdata.apellido : ''}
+                            value={user ? user.userdata.apellido : ''}
                           />
                           <MDBRow>
                             <MDBCol md="8">
@@ -71,7 +97,7 @@ export const InfoUser = () => {
                                 id="email"
                                 type="text"
                                 required={true}
-                                //   value={user ? user.userdata.correo : ''}
+                                value={user ? user.userdata.correo : ''}
                               />
                             </MDBCol>
 
@@ -81,7 +107,7 @@ export const InfoUser = () => {
                                 label="Edad"
                                 id="edad"
                                 type="text"
-                                //   value={user ? user.userdata.edad : ''}
+                                value={user ? user.userdata.edad : ''}
                               />
                             </MDBCol>
                           </MDBRow>
@@ -91,6 +117,7 @@ export const InfoUser = () => {
                               label="Password"
                               id="password"
                               type="password"
+                              value={user ? user.userdata.password : ''}
                             />
                           </MDBRow>
                           <div className="text-center">

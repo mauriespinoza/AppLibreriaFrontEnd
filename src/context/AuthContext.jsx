@@ -39,6 +39,30 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const updateUser = async () => {
+    try {
+      const response = await axiosClient.post("/login",user);
+      console.log(`signin.response.token: ${JSON.stringify(response.data)}`)
+      if(response.data){
+        setToken(response.data);
+        //setErrors([response.data.message]);
+        setUser(response.data.userdata);
+        setIsAuthenticated(true);
+        setUser(response.data);
+        return true;
+       // localStorage.setItem("Token",response.data);
+      } else {
+        setToken('');
+        return false;
+        //localStorage.setItem("Token",'');
+      }
+      
+    } catch (error) {
+      console.log("sign.exception: " + error)
+      setErrors([error.response.data.message]);
+      return false;
+    }
+  }
   useEffect(() => {
     localStorage.setItem("Token",JSON.stringify(token) ?? '' )
   }, [token])

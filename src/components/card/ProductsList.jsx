@@ -39,7 +39,7 @@ export const ProductsList = () => {
     
     return (
       <>
-        <Typography variant="p" fontWeight='bold' fontSize={36} color="text.primary" component="p">Los más Vendidos</Typography>
+        <Typography variant="p" className="title" fontWeight='bold'  fontSize={36} color="text.primary" component="p">Los más Vendidos</Typography>
         <div className="card-container">
           <Row className="g-4" xs={1} md={4}>
             {products
