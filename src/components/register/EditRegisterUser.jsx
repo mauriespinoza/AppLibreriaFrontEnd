@@ -15,20 +15,13 @@ import { useNavigate } from "react-router-dom";
 
 
 export const EditRegisterUser = () => {
-   const  {user,token}   = useAuth();
+   const  {user}   = useAuth();
    const navigate= useNavigate();
-   //console.log("user", user.userdata)
-   //console.log("token",token);
-   //const {rut,nombre,apellido, edad,correo}= user.userdata;
-  // const {rut, nombre, apellido, edad, correo} = user;
-  
-  //const [name, setName] = useState('rut');
-  //const [email, setEmail] = useState("lucas@hhh.cl");
 
-  const handleSubmit = (e) => {
+
+  const onSubmitData = (e) => {
     e.preventDefault();
-    //const updatedUser = { ...name, email };
-    //updateUser(updatedUser);
+
   };
   useEffect(()=> {
     if(user===null){
@@ -42,11 +35,6 @@ export const EditRegisterUser = () => {
         <MDBRow className="d-flex justify-content-center align-items-center">
           <MDBCol lg="8">
             <MDBCard className="my-5 rounded-3" style={{ maxWidth: "auto" }}>
-              {/* <MDBCardImage
-                src="https://res.cloudinary.com/dxy1spfug/image/upload/c_thumb,g_face,w_129/v1694211813/utensilios-del-arte-pinturas_k6heev.webp"
-                className="w-100 rounded-top"
-                alt="Sample photo"
-              /> */}
             <Form onSubmit = {(e) => {onSubmitData(e)}}>
               <MDBCardBody className="px-5">
                 <h3 className="text-center mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">
@@ -120,58 +108,6 @@ export const EditRegisterUser = () => {
           </MDBCol>
         </MDBRow>
       </MDBContainer>
-
-      {/* <MDBContainer fluid>
-
-      <MDBCard className='text-black m-5' style={{borderRadius: '25px'}}>
-        <MDBCardBody>
-          <MDBRow>
-            <MDBCol className='order-2 order-lg-1 d-flex flex-column align-items-center'>
-            
-            <Form>
-
-              <p className="text-center h2 fw-bold mb-5 mx-1 mx-md-4 mt-4">Información de la cuenta</p>
-              
-
-        
-
-              <div className="d-flex flex-row align-items-center mb-4 ">
-               	<MDBIcon fas icon="user me-3" size='lg'/>
-                <MDBInput label='Nombre' id='nombre' name="nombre" type='text'  size='lg' className='w-100' required={true}/>
-              </div>
-
-              <div className="d-flex flex-row align-items-center mb-4 ">
-               	<MDBIcon fas icon="user me-3" size='lg'/>
-                <MDBInput label='Apellido' id='apellido' name="apellido" type='text' size='lg' className='w-100' required={true}/>
-              </div>
-
-              <div className="d-flex flex-row align-items-center mb-4 ">
-               	<MDBIcon fas icon="user me-3" size='lg'/>
-                <MDBInput label='Edad' id='edad' name="edad" type='text' size='lg' className='w-100' required={true}/>
-              </div>
-
-              <div className="d-flex flex-row align-items-center mb-4">
-                <MDBIcon fas icon="envelope me-3" size='lg'/>
-                <MDBInput label='Mail' id='email' name="email" type='email' size='lg' required={true}/>
-              </div>
-
-              <div className="d-flex flex-row align-items-center mb-4">
-                <MDBIcon fas icon="lock me-3" size='lg'/>
-                <MDBInput label='Clave' id='password' name="password" type='password' size='lg' required={true}/>
-              </div>
-
-	
-              <MDBBtn  variant="primary" size='lg' type='submit'>Crear cuenta</MDBBtn>
-              </Form>
-            </MDBCol>
-
-        
-            
-          </MDBRow>
-        </MDBCardBody>
-      </MDBCard>
-
-    </MDBContainer> */}
     </>
   );
 };

@@ -4,7 +4,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Button } from "react-bootstrap";
 import { axiosClient } from "../../config/api";
-// import "./productCard.css";
+
 export const ProductCard = () => {
   const [product, setProduct] = useState([]);
 

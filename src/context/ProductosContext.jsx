@@ -13,7 +13,7 @@ const useCartReducer = () => {
       payload: product,
     });
 
-    const addQtyToCart = (product) =>
+  const addQtyToCart = (product) =>
     cartDispatch({
       type: "ADD_QTY_CART",
       payload: product,
@@ -23,28 +23,25 @@ const useCartReducer = () => {
       type: "REMOVE_ITEMS_CART",
       payload: product,
     });
-  const clearCart = () => 
+  const clearCart = () =>
     cartDispatch({
       type: "CLEAR_CART",
     });
   return { cartState, addToCart, removeFromCart, addQtyToCart, clearCart };
 };
 
-
 export const ProductosProvider = ({ children }) => {
-
   const [products, setProducts] = useState([]);
-  const [product,setProduct] =useState([]);
+  const [product, setProduct] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [countProduct, setCountProduct] = useState(1);
-  const [count,setCount] = useState(1);
-  const { cartState, addToCart, removeFromCart, addQtyToCart, clearCart } = useCartReducer();
-  
+  const [count, setCount] = useState(1);
+  const { cartState, addToCart, removeFromCart, addQtyToCart, clearCart } =
+    useCartReducer();
 
   const getProducts = async () => {
     try {
       const response = await axiosClient.get("/products");
-      console.log(response);
+
       setProducts(response.data);
     } catch (error) {
       console.log(error);
@@ -54,8 +51,7 @@ export const ProductosProvider = ({ children }) => {
   const getProductByCategory = async (category) => {
     try {
       const response = await axiosClient.get(`/productscategory/${category}`);
-      //console.log("getProductByCategory.response: " + JSON.stringify(response));
-      console.log(response);
+
       setProducts(response.data);
     } catch (error) {
       console.log(error);
@@ -79,20 +75,21 @@ export const ProductosProvider = ({ children }) => {
 
   return (
     <ProductosContext.Provider
-      value={{ 
-        products, 
-        getProductByCategory, 
-        getProductById , 
-        product, 
-        currentPage, 
+      value={{
+        products,
+        getProductByCategory,
+        getProductById,
+        product,
+        currentPage,
         setCurrentPage,
         addToCart,
         removeFromCart,
-        cart: cartState, 
+        cart: cartState,
         count,
         setCount,
         addQtyToCart,
         clearCart,
+        getProducts,
       }}
     >
       {children}

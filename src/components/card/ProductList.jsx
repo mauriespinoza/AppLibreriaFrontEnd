@@ -1,12 +1,11 @@
-import { useState, useEffect, useContext } from "react";
-import { axiosClient } from "../../config/api";
+import { useState, useEffect } from "react";
 import Row from "react-bootstrap/Row";
 import { Pagination } from "../../components/card/Pagination";
 import "./productList.css";
-import ProductsContext from "../../context/ProductContext";
 import { useProduct } from "../../hooks/useProduct";
+
 export const ProductList = () => {
-  const {products} = useProduct();
+  const { products } = useProduct();
   // console.log(products.length);
   // const globalContext = useContext(ProductsContext);
 
@@ -18,16 +17,7 @@ export const ProductList = () => {
 
   const lastIndex = currentPage * productsPerPage;
   const fisrstIndex = lastIndex - productsPerPage;
-  //obtenemos las categorias desde la BD
-  // const getProducts = async () => {
-  //   try {
-  //     const response = await axiosClient.get("/products");
-  //     console.log(response);
-  //     setProducts(response.data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+
   useEffect(() => {
     // getProducts();
   }, []);
