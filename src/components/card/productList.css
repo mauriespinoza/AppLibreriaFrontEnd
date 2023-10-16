@@ -3,6 +3,11 @@
     padding-right: 30px;
     padding-top: 10px;
     padding-bottom: 10px;
+   
+}
+.title{
+    padding-left: 20px;
+    font-family: 'Delicious Handrawn', cursive;
 }
 .figure{
     box-sizing: border-box;

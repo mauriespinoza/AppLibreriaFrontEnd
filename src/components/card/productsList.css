@@ -1,3 +1,7 @@
+.card-container{
+    padding: 20px;
+}
 .title{
+    padding-left: 20px;
     font-family: 'Delicious Handrawn', cursive;
 }

@@ -1,3 +1,6 @@
+.card{
+    padding: 20px;
+}
 .card-img{
     vertical-align: middle;
     object-fit: cover;
