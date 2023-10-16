@@ -8,13 +8,13 @@ Aplicación web de tienda virtual de Articulos Escolares y Oficina.
 
 Este sitio web Candelabra es un aplicación de tipo ECommerce para la venta de Articulos Escolares y Oficina. Que contiene lo siguiente:
 
--Home
--Filtro Categorias
--Catalogo Productos
--Detalle Productos
--Carro de Compras
--Login
--Registro
+* Home
+* Filtro Categorias
+* Catalogo Productos
+* Detalle Productos
+* Carro de Compras
+* Login
+* Registro
 
 ## Inicio 🚀
 
