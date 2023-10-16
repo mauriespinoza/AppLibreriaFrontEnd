@@ -2,7 +2,7 @@
 
 Aplicación web de tienda virtual de Articulos Escolares y Oficina.
 
-![Candelabra] (https://res.cloudinary.com/dxy1spfug/image/upload/v1697416673/homeCandelabra_ugyfjp.webp)
+![Candelabra] (homeCandelabra.png)
 
 [mauriespinoza.github.io] https://sage-medovik-daf437.netlify.app/
 
